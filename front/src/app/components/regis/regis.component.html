@@ -1,0 +1,130 @@
+<section class="h-100 gradient-form" style="background-color: #eee;">
+
+  <div class="container py-5 h-100">
+    <div *ngIf="succMsg" class="alert alert-success">
+      {{succMsg}}
+  </div>
+  <div *ngIf="errMsg" class="alert alert-danger">
+      {{errMsg}}
+  </div>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 ">
+
+                <div class="text-center">
+                  <img src="https://www.neosofttech.com/wp-content/uploads/2022/12/neosoft-logo.svg"
+                    style="width: 185px;" alt="logo">
+                  <h4 class="mt-1 pb-1">We are The NeoSOFT Team</h4>
+                </div>
+
+                <form [formGroup]="myForm" (ngSubmit)="postData()">
+                  <p class="fs-5 mt-2">Please Register your account</p>
+
+                  <div class="form-outline mb-2">
+                    <label for="exampleInputEmail1" class="form-label fw-bold ">First Name</label>
+                    <input type="text" class="form-control" formControlName="firstName" [(ngModel)]="proData.firstName"
+                      placeholder="Enter First Name" required>
+                    <div class="alert alert-danger" *ngIf="fdata['firstName'].invalid && fdata['firstName'].dirty">
+                      <div *ngIf="fdata['firstName'].errors && fdata['firstName'].errors['required']">
+                        firstName is required
+                      </div>
+                      <div *ngIf="fdata['firstName'].errors && fdata['firstName'].errors['pattern']">
+                        Enter valid first Name
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-2">
+                    <label for="exampleInputEmail1" class="form-label fw-bold ">Last Name</label>
+                    <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="proData.lastName"
+                      placeholder="Enter Last Name" required>
+                    <div class="alert alert-danger" *ngIf="fdata['lastName'].invalid && fdata['lastName'].dirty">
+                      <div *ngIf="fdata['lastName'].errors && fdata['lastName'].errors['required']">
+                        Last Name is required
+                      </div>
+                      <div *ngIf="fdata['lastName'].errors && fdata['lastName'].errors['pattern']">
+                        Enter valid Last Name
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-2">
+                    <label for="exampleInputEmail1" class="form-label fw-bold ">Email</label>
+                    <input type="text" class="form-control" formControlName="email" [(ngModel)]="proData.email"
+                      placeholder="Enter email" required>
+                    <div class="alert alert-danger" *ngIf="fdata['email'].invalid && fdata['email'].dirty">
+                      <div *ngIf="fdata['email'].errors && fdata['email'].errors['required']">
+                        Email is required
+                      </div>
+                      <div *ngIf="fdata['email'].errors && fdata['email'].errors['pattern']">
+                        Enter valid Email address
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label for="exampleInputEmail1" class="form-label fw-bold text-start mt-2">Password</label>
+                    <input type="password" class="form-control" formControlName="password" [(ngModel)]="proData.password"
+                      placeholder="Enter The password" required>
+                    <div class="alert alert-danger" *ngIf="fdata['password'].invalid && fdata['password'].dirty">
+                      <div *ngIf="fdata['password'].errors && fdata['password'].errors['required']">
+                        Password is required
+                      </div>
+                      <div *ngIf="fdata['password'].errors && fdata['password'].errors['pattern']">
+                        Enter valid password
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-2">
+                    <label for="exampleInputEmail1" class="form-label fw-bold ">Contact Number</label>
+                    <input type="text" class="form-control" formControlName="contactNumber" [(ngModel)]="proData.contactNumber"
+                      placeholder="Enter Contact number" required>
+                    <div class="alert alert-danger" *ngIf="fdata['contactNumber'].invalid && fdata['contactNumber'].dirty">
+                      <div *ngIf="fdata['contactNumber'].errors && fdata['contactNumber'].errors['required']">
+                        Contact Number is required
+                      </div>
+                      <div *ngIf="fdata['contactNumber'].errors && fdata['contactNumber'].errors['pattern']">
+                        Enter valid Contact Number 
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="text-center pt-1  pb-1 mt-4 ">
+                    <input type="submit" value="Sign Up"
+                        class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"[disabled]="myForm.invalid"
+                        />
+
+                </div>
+
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Already have an account?</p>
+                    <button type="button" class="btn btn-outline-danger" routerLink="/">Login</button>
+                  </div>
+
+                </form>
+
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4">We are more than just a company</h4>
+                <p class="small mb-0">Engineering ideas to improvise lives, NeoSOFT over the past 25 years, has
+                  empowered ambitious change-makers around the world with sustained digital capabilities. We are a
+                  trusted Digital Engineering and Enterprise Modernization partner with offerings that enable our
+                  clients’ by creating a unique competitive advantage. While leaving room for continuous enhancement,
+                  NeoSOFT has leveraged the most in-demand technologies, methodologies, and framework components, for
+                  solving important client challenges. Combining deep technical competencies and industry experience, we
+                  ensure robustness, extensibility, and continuity in the solutions we deliver.
+                  .</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

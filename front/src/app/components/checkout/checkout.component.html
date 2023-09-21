@@ -1,0 +1,393 @@
+<div class="container">
+
+    <div class="row mt-4">
+        <div class="col-md-8 card">
+            <div class="p-4">
+                <h3 class="text-danger">shipping address</h3>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                    <i class="fa fa-plus"></i> Add address
+                </button>
+                <div class="row mt-3">
+                    <form [formGroup]="form" (ngSubmit)="submit()">
+                        <div *ngIf="f.address.touched && f.address.invalid" class="alert alert-danger">
+                            <div>address is required.</div>
+                        </div>
+                        <div *ngFor="let address of proData;let i=index" class="d-flex">
+                            <div *ngIf="i==0; else elseBlock" class="col-1 text-white px-2 py-4">
+                                <input type="radio" id="address" class="custom-control-input" formControlName="address" name="address" value="{{address._id}}" checked />
+                            </div>
+                            <ng-template #elseBlock>
+                                <div class="col-1 text-white px-2 py-4">
+                                    <input type="radio" id="address" class="custom-control-input" formControlName="address" value="{{address._id}}" class="mx-auto" />
+                                </div>
+                            </ng-template>
+                            <div class="col-6">
+                                <p class=""><span
+                                        class="h6">{{address.name}}</span><br />{{address.landmark}},{{address.street}},<br />{{address.city}},
+                                    {{address.state}},{{address.zipcode}},<br />
+                                    phone no : {{address.contactNumber}}</p>
+                            </div>
+
+                            <div class="col-5">
+                                <button type="button" class="btn btn-danger" (click)="deleteaddress(address._id)"><i
+                                        class="fa fa-trash"></i></button>
+                                <button type="button" class="btn btn-success ms-2" id="editForm"
+                                    (click)="openmodel(address)" data-bs-toggle="modal" data-bs-target="#editModal"><i
+                                        class="fa fa-edit"></i></button>
+                            </div>
+                        </div>
+                        <button class="btn btn-dark" type="submit" [disabled]="!form.valid">Select Address</button>
+                    </form>
+                </div>
+
+                <!-- edit address model -->
+                <div class="modal" id="editModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h4 class="modal-title">edit Address</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form [formGroup]="editForm" (ngSubmit)="editData()">
+
+                                    <div class="form-outline mb-2">
+                                        <label for="exampleInputEmail1" class="form-label fw-bold ">Full name (First
+                                            and
+                                            Last
+                                            name)</label>
+                                        <input type="hidden" class="form-control" formControlName="id"
+                                            [(ngModel)]="prodata._id" required>
+                                        <input type="text" class="form-control" formControlName="name"
+                                            [(ngModel)]="prodata.name" placeholder="Enter Name" required>
+                                        <div class="text-danger"
+                                            *ngIf="editdata['name'].invalid && editdata['name'].touched">
+                                            <div *ngIf="editdata['name'].errors && editdata['name'].errors['required']">
+                                                Name is required
+                                            </div>
+                                            <div *ngIf="editdata['name'].errors && editdata['name'].errors['pattern']">
+                                                Enter valid Name
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-2">
+                                        <label for="exampleInputEmail1" class="form-label fw-bold ">Contact
+                                            Number</label>
+                                        <input type="text" class="form-control" formControlName="contactNumber"
+                                            [(ngModel)]="prodata.contactNumber" placeholder="Enter Contact number"
+                                            required>
+                                        <div class="text-danger"
+                                            *ngIf="editdata['contactNumber'].invalid && editdata['contactNumber'].touched">
+                                            <div
+                                                *ngIf="editdata['contactNumber'].errors && editdata['contactNumber'].errors['required']">
+                                                Contact Number is required
+                                            </div>
+                                            <div
+                                                *ngIf="editdata['contactNumber'].errors && editdata['contactNumber'].errors['pattern']">
+                                                Enter valid Contact Number
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-outline mb-2">
+                                                <label for="exampleInputEmail1" class="form-label fw-bold ">city</label>
+                                                <input type="text" class="form-control" formControlName="city"
+                                                    [(ngModel)]="prodata.city" placeholder="Enter city" required>
+                                                <div class="text-danger"
+                                                    *ngIf="editdata['city'].invalid && editdata['city'].touched">
+                                                    <div
+                                                        *ngIf="editdata['city'].errors && editdata['city'].errors['required']">
+                                                        city is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="editdata['city'].errors && editdata['city'].errors['pattern']">
+                                                        Enter valid city
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-outline mb-2">
+                                                <label for="exampleInputEmail1"
+                                                    class="form-label fw-bold ">landmark</label>
+                                                <input type="text" class="form-control" formControlName="landmark"
+                                                    [(ngModel)]="prodata.landmark" placeholder="Enter landmark"
+                                                    required>
+                                                <div class="text-danger"
+                                                    *ngIf="editdata['landmark'].invalid && editdata['landmark'].touched">
+                                                    <div
+                                                        *ngIf="editdata['landmark'].errors && editdata['landmark'].errors['required']">
+                                                        landmark is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="editdata['landmark'].errors && editdata['landmark'].errors['pattern']">
+                                                        Enter valid landmark
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-outline mb-2">
+                                                <label for="exampleInputEmail1"
+                                                    class="form-label fw-bold ">street</label>
+                                                <input type="text" class="form-control" formControlName="street"
+                                                    [(ngModel)]="prodata.street" placeholder="Enter street" required>
+                                                <div class="text-danger"
+                                                    *ngIf="editdata['street'].invalid && editdata['street'].touched">
+                                                    <div
+                                                        *ngIf="editdata['street'].errors && editdata['street'].errors['required']">
+                                                        street is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="editdata['street'].errors && editdata['street'].errors['pattern']">
+                                                        Enter valid street
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-outline mb-2">
+                                                <label for="exampleInputEmail1"
+                                                    class="form-label fw-bold ">state</label>
+                                                <input type="text" class="form-control" formControlName="state"
+                                                    [(ngModel)]="prodata.state" placeholder="Enter state" required>
+                                                <div class="text-danger"
+                                                    *ngIf="editdata['state'].invalid && editdata['state'].touched">
+                                                    <div
+                                                        *ngIf="editdata['state'].errors && editdata['state'].errors['required']">
+                                                        state is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="editdata['state'].errors && editdata['state'].errors['pattern']">
+                                                        Enter valid state
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-outline mb-2">
+                                                <label for="exampleInputEmail1"
+                                                    class="form-label fw-bold ">zipcode</label>
+                                                <input type="number" class="form-control" formControlName="zipcode"
+                                                    [(ngModel)]="prodata.zipcode" placeholder="Enter zipcode" required>
+                                                <div class="text-danger"
+                                                    *ngIf="editdata['zipcode'].invalid && editdata['zipcode'].touched">
+                                                    <div
+                                                        *ngIf="editdata['zipcode'].errors && editdata['zipcode'].errors['required']">
+                                                        zipcode is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="editdata['zipcode'].errors && editdata['zipcode'].errors['pattern']">
+                                                        Enter valid zipcode address
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <input type="submit" value="Edit address" class="btn btn-dark"
+                                            [disabled]="editForm.invalid" data-bs-dismiss="modal" />
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- add adress cart -->
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add Address</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form [formGroup]="addForm" (ngSubmit)="postData()">
+
+                                    <div class="form-outline mb-2">
+                                        <label for="exampleInputEmail1" class="form-label fw-bold ">Full name (First
+                                            and
+                                            Last
+                                            name)</label>
+                                        <input type="text" class="form-control" formControlName="name"
+                                            placeholder="Enter Name" required>
+                                        <div class="text-danger"
+                                            *ngIf="adddata['name'].invalid && adddata['name'].dirty">
+                                            <div *ngIf="adddata['name'].errors && adddata['name'].errors['required']">
+                                                Name is required
+                                            </div>
+                                            <div *ngIf="adddata['name'].errors && adddata['name'].errors['pattern']">
+                                                Enter valid Name
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-2">
+                                        <label for="exampleInputEmail1" class="form-label fw-bold ">Contact
+                                            Number</label>
+                                        <input type="text" class="form-control" formControlName="contactNumber"
+                                            placeholder="Enter Contact number" required>
+                                        <div class="text-danger"
+                                            *ngIf="adddata['contactNumber'].invalid && adddata['contactNumber'].dirty">
+                                            <div
+                                                *ngIf="adddata['contactNumber'].errors && adddata['contactNumber'].errors['required']">
+                                                Contact Number is required
+                                            </div>
+                                            <div
+                                                *ngIf="adddata['contactNumber'].errors && adddata['contactNumber'].errors['pattern']">
+                                                Enter valid Contact Number
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-outline mb-2">
+                                                <label for="exampleInputEmail1" class="form-label fw-bold ">city</label>
+                                                <input type="text" class="form-control" formControlName="city"
+                                                    placeholder="Enter city" required>
+                                                <div class="text-danger"
+                                                    *ngIf="adddata['city'].invalid && adddata['city'].dirty">
+                                                    <div
+                                                        *ngIf="adddata['city'].errors && adddata['city'].errors['required']">
+                                                        city is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="adddata['city'].errors && adddata['city'].errors['pattern']">
+                                                        Enter valid city
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-outline mb-2">
+                                                <label for="exampleInputEmail1"
+                                                    class="form-label fw-bold ">landmark</label>
+                                                <input type="text" class="form-control" formControlName="landmark"
+                                                    placeholder="Enter landmark" required>
+                                                <div class="text-danger"
+                                                    *ngIf="adddata['landmark'].invalid && adddata['landmark'].dirty">
+                                                    <div
+                                                        *ngIf="adddata['landmark'].errors && adddata['landmark'].errors['required']">
+                                                        landmark is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="adddata['landmark'].errors && adddata['landmark'].errors['pattern']">
+                                                        Enter valid landmark
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-outline mb-2">
+                                                <label for="exampleInputEmail1"
+                                                    class="form-label fw-bold ">street</label>
+                                                <input type="text" class="form-control" formControlName="street"
+                                                    placeholder="Enter street" required>
+                                                <div class="text-danger"
+                                                    *ngIf="adddata['street'].invalid && adddata['street'].dirty">
+                                                    <div
+                                                        *ngIf="adddata['street'].errors && adddata['street'].errors['required']">
+                                                        street is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="adddata['street'].errors && adddata['street'].errors['pattern']">
+                                                        Enter valid street
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-outline mb-2">
+                                                <label for="exampleInputEmail1"
+                                                    class="form-label fw-bold ">state</label>
+                                                <input type="text" class="form-control" formControlName="state"
+                                                    placeholder="Enter state" required>
+                                                <div class="text-danger"
+                                                    *ngIf="adddata['state'].invalid && adddata['state'].dirty">
+                                                    <div
+                                                        *ngIf="adddata['state'].errors && adddata['state'].errors['required']">
+                                                        state is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="adddata['state'].errors && adddata['state'].errors['pattern']">
+                                                        Enter valid state
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-outline mb-2">
+                                                <label for="exampleInputEmail1"
+                                                    class="form-label fw-bold ">zipcode</label>
+                                                <input type="number" class="form-control" formControlName="zipcode"
+                                                    placeholder="Enter zipcode" required>
+                                                <div class="text-danger"
+                                                    *ngIf="adddata['zipcode'].invalid && adddata['zipcode'].dirty">
+                                                    <div
+                                                        *ngIf="adddata['zipcode'].errors && adddata['zipcode'].errors['required']">
+                                                        zipcode is required
+                                                    </div>
+                                                    <div
+                                                        *ngIf="adddata['zipcode'].errors && adddata['zipcode'].errors['pattern']">
+                                                        Enter valid zipcode address
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <input type="submit" value="Add address" class="btn btn-dark"
+                                            [disabled]="addForm.invalid" data-bs-dismiss="modal" />
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 ">
+            <div class="row p-2">
+                <div class="card p-4 mt-2">
+                    <h4>order Summary</h4>
+                    <p class="mt-2">items:<span class="float-end">&#8377;{{total}}</span></p>
+                    <p>Shipping & handling: :<span class="float-end">---</span></p>
+                    <p>Total before tax :<span class="float-end">---</span></p>
+                    <p>Estimated tax to be collectedx :<span class="float-end">---</span></p>
+                    <hr />
+                    <h5 class="text-danger">Order Total<span class="float-end text-dark">&#8377;
+                            {{total}}</span>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

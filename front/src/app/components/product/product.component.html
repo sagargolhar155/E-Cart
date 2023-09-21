@@ -1,0 +1,21 @@
+<h2 class="text-center p-3"> Latest Products</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let pro of proData| paginate: { itemsPerPage: 3, currentPage: p } |search:search">
+      <div class="card mt-4">
+        <img [src]="pro.imageURL" class="card-img-top p-2" alt="..." width="200" height="300">
+        <div class="card-body">
+          <h5 class="card-title">{{pro.name}}</h5>
+          <p class="card-text"> Price : {{pro.price}}</p>
+          <div class="d-flex">
+            <a href="#" class="btn btn-primary" [routerLink]="['/viewproduct',pro._id]">View</a>
+            <button class="btn btn-danger ms-2" *ngIf="isAdmin" (click)="delPro(pro._id)"> Delete</button>
+            <a href="#" class="btn btn-success ms-2 float-end" *ngIf="isAdmin" [routerLink]="['/edit',pro._id]">Edit
+              Product</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pagination-controls (pageChange)="p = $event" class="text-center mt-4"></pagination-controls>
+  </div>
+</div>

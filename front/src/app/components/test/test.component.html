@@ -1,0 +1,114 @@
+<style>
+ .M13_42 {
+    font-family: RobotoMB;
+    font-size: 13px;
+    color: #424242;
+    line-height: 18px;
+    min-width: 100px;
+}
+
+.block {
+    display: flex;
+    margin: 10px;
+    /* flex-wrap: nowrap; */
+    overflow-x: auto;
+}
+
+.block div {
+    display: inline-block;
+    margin-right: 16px;
+    padding: 5px 10px; 
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+}
+
+</style> 
+<div class="block mt-5">
+    <div class="M13_42">
+        <label>0-6 Months</label>
+    </div>
+    <div class="M13_42">
+        <label>6M-2 Years</label>
+    </div>
+    <div class="M13_42">
+        <label> 2-4 Years</label>
+    </div>
+    <div class="M13_42">
+        <label>4-6 Years</label>
+    </div>
+    <div class="M13_42">
+        <label>6-14 Years</label>
+    </div>
+    <div class="M13_42">
+        <label>4-6 Years</label>
+    </div>
+    <div class="M13_42">
+        <label>6-14 Years</label>
+    </div><div class="M13_42">
+        <label>4-6 Years</label>
+    </div>
+    <div class="M13_42">
+        <label>6-14 Years</label>
+    </div><div class="M13_42">
+        <label>4-6 Years</label>
+    </div>
+    <div class="M13_42">
+        <label>6-14 Years</label>
+    </div>
+</div>
+
+
+
+<style>
+    .container {
+  justify-content: space-between;
+}
+
+.block {
+  align-items: center;
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.text {
+  font-size: 16px;
+  color: #333;
+}
+
+    .back-btn,
+.forward-btn {
+  border: none;
+  background-color: #ccc;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px;
+  margin: 0 10px;
+}
+
+.back-btn:hover,
+.forward-btn:hover {
+  background-color: #aaa;
+}
+</style>
+
+
+
+<div class="container mt-5">
+    <div *ngIf="showFirst" class="block bg-primary mt-5">
+        <button class="forward-btn mt-4" (click)="showFirst = false" [disabled]="!showFirst">Forward</button>
+      <img src="//cdn.fcglcdn.com/brainbees/images/m/pgirldefault_new.png" alt="Image 1" class="image">
+      <span class="text">first</span>
+    </div>
+    <div *ngIf="!showFirst" class="block bg-success mt-5">
+      <img src="//cdn.fcglcdn.com/brainbees/images/m/pall_new.png" alt="Image 2" class="image">
+      <span class="text">second</span>
+      <button class="back-btn mt-5" (click)="showFirst = true" [disabled]="showFirst">Backward</button>
+    </div>
+  </div>
+  
+  

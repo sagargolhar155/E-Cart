@@ -1,0 +1,51 @@
+<style>
+    .viewimg{
+        height: 100%;
+        width: 100%;
+    }
+</style>
+    <div class="container mt-5 mb-5">
+        <h1 class="text-center text-success">Product Details</h1>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4 mt-5">
+                <div class="viewimg">
+                    <img src={{proData.prodata?.imageURL}} class="h-75 w-100" />
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 mt-2">
+                <h3 class="mt-5">
+                    {{proData.prodata?.name}}
+                </h3>
+                <h5 class="mt-4">
+                   {{proData.prodata?.category}}
+                </h5>
+                <h5 class="mt-4">
+                    <span class="text-danger"><b>&#8377;{{proData.prodata?.price}}</b></span>
+                </h5>
+                <h4>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star "></i>
+
+                </h4>
+                <p class="mt-4">
+                    {{proData.prodata?.description}}
+                </p>
+                <a>
+                <button class="btn btn-primary" (click)="addCart(proData.prodata?._id)">
+                    <i class="fa fa-shopping-cart"></i> Add to Cart
+                </button>
+            </a>
+           
+            <a [routerLink]="['/buynow',proData.prodata?._id]">
+                <button class="btn btn-success ms-2">
+                    <i class="fa fa-rupee"></i> Buy Now
+                </button>
+            </a>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,150 @@
+<section class="h-100 gradient-form" style="background-color: #eee;">
+
+    <div class="container py-5 h-100">
+
+        <div *ngIf="errMsg" class="alert alert-danger">
+            {{errMsg}}
+        </div>
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-5">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+                        <div class="col-lg-12">
+                            <div class="card-body ps-5 pe-5 ">
+                                <form [formGroup]="myForm" (ngSubmit)="formData()">
+                                    <p class="fs-2 text-center">Add Product</p>
+
+                                    <div class="form-outline mb-2">
+                                        <label for="exampleInputEmail1" class="form-label fw-bold ">Product Name</label>
+                                        <input type="text" class="form-control" formControlName="name"
+                                            [(ngModel)]="proData.name" placeholder="Enter Product Name" required>
+                                        <div class="alert alert-danger"
+                                            *ngIf="fdata['name'].invalid && fdata['name'].touched">
+                                            <div
+                                                *ngIf="fdata['name'].errors && fdata['name'].errors['required']">
+                                                Product Name is required
+                                            </div>
+                                            <div
+                                                *ngIf="fdata['name'].errors && fdata['name'].errors['pattern']">
+                                                Enter valid Product Name
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-2">
+                                        <label for="exampleInputEmail1" class="form-label fw-bold ">Enter category</label>
+                                        <input type="text" class="form-control" formControlName="category"
+                                            [(ngModel)]="proData.category" placeholder="Enter Category" required>
+                                        <div class="alert alert-danger"
+                                            *ngIf="fdata['category'].invalid && fdata['category'].touched">
+                                            <div
+                                                *ngIf="fdata['category'].errors && fdata['category'].errors['required']">
+                                                Last Name is required
+                                            </div>
+                                            <div
+                                                *ngIf="fdata['category'].errors && fdata['category'].errors['pattern']">
+                                                Enter valid Last Name
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-2">
+                                        <label for="exampleInputEmail1" class="form-label fw-bold ">price</label>
+                                        <input type="number" class="form-control" formControlName="price"
+                                            [(ngModel)]="proData.price" placeholder="Enter price" required>
+                                        <div class="alert alert-danger"
+                                            *ngIf="fdata['price'].invalid && fdata['price'].touched">
+                                            <div *ngIf="fdata['price'].errors && fdata['price'].errors['required']">
+                                                price is required
+                                            </div>
+                                            <div *ngIf="fdata['price'].errors && fdata['price'].errors['pattern']">
+                                                Enter valid price 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label for="exampleInputEmail1"
+                                            class="form-label fw-bold text-start mt-2">description</label>
+                                        <input type="description" class="form-control" formControlName="description"
+                                            [(ngModel)]="proData.description" placeholder="Enter The description" required>
+                                        <div class="alert alert-danger"
+                                            *ngIf="fdata['description'].invalid && fdata['description'].touched">
+                                            <div
+                                                *ngIf="fdata['description'].errors && fdata['description'].errors['required']">
+                                                description is required
+                                            </div>
+                                            <div
+                                                *ngIf="fdata['description'].errors && fdata['description'].errors['pattern']">
+                                                Enter valid description
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label for="exampleInputEmail1"
+                                            class="form-label fw-bold text-start mt-2">manufacturer</label>
+                                        <input type="manufacturer" class="form-control" formControlName="manufacturer"
+                                            [(ngModel)]="proData.manufacturer" placeholder="Enter the manufacturer details" required>
+                                        <div class="alert alert-danger"
+                                            *ngIf="fdata['manufacturer'].invalid && fdata['manufacturer'].touched">
+                                            <div
+                                                *ngIf="fdata['manufacturer'].errors && fdata['manufacturer'].errors['required']">
+                                                manufacturer is required
+                                            </div>
+                                            <div
+                                                *ngIf="fdata['description'].errors && fdata['description'].errors['pattern']">
+                                                Enter valid details
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-2">
+                                        <label for="exampleInputEmail1" class="form-label fw-bold ">Available Items                                       Number</label>
+                                        <input type="number" class="form-control" formControlName="availableItems"
+                                            [(ngModel)]="proData.availableItems" placeholder="Enter Available Item"
+                                            required>
+                                        <div class="alert alert-danger"
+                                            *ngIf="fdata['availableItems'].invalid && fdata['availableItems'].touched">
+                                            <div
+                                                *ngIf="fdata['availableItems'].errors && fdata['availableItems'].errors['required']">
+                                                availableItem is required
+                                            </div>
+                                            <div
+                                                *ngIf="fdata['availableItems'].errors && fdata['availableItems'].errors['pattern']">
+                                                Enter valid availableItems
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <label for="exampleInputEmail1"
+                                            class="form-label fw-bold text-start mt-2"> Product Image </label>
+                                            <input type="file" name="att" class="form-control" (change)="upImage($event)"/>
+
+                                         <div class="alert alert-danger"
+                                            *ngIf="fdata['description'].invalid && fdata['description'].touched">
+                                            <div
+                                                *ngIf="fdata['description'].errors && fdata['description'].errors['required']">
+                                                image is required
+                                            </div>
+                                            <div
+                                                *ngIf="fdata['description'].errors && fdata['description'].errors['pattern']">
+                                                Enter valid image
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center pt-1  pb-1 mt-4 ">
+                                        <input type="submit" value="Add Product"
+                                            class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                            [disabled]="myForm.invalid" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
